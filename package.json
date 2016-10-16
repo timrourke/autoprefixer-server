@@ -1,0 +1,25 @@
+{
+  "name": "autoprefixer-server",
+  "version": "1.0.0",
+  "description": "A tiny Express.js server for autoprefixing CSS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timrourke/autoprefixer-server.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timrourke/autoprefixer-server/issues"
+  },
+  "homepage": "https://github.com/timrourke/autoprefixer-server#readme",
+  "dependencies": {
+    "autoprefixer": "^6.5.1",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "postcss": "^5.2.4"
+  }
+}

@@ -10,11 +10,13 @@ var autoprefix = function autoprefix(css) {
 
 app.use(bodyParser.json());
 
+app.disable('x-powered-by');
+
 app.post('/', function(req, res) {
 	try {
 		var css = req.body.data.attributes.css;
 	} catch(e) {
-		return res.status(422).send('Invalid request');
+		return res.status(422).send('Unprocessable Entity');
 	}
 
 	autoprefix(css).then(function(result) {
@@ -26,14 +28,22 @@ app.post('/', function(req, res) {
 			res.status(400).send(errors.join(','));
 		}
 
-		res.send(result.css);
+		res.set('Content-Type', 'application/json');
+		
+		res.json({
+			data: {
+				type: "autoprefixes",
+				attributes: {
+					css: req.body.data.attributes.css,
+					"autoprefixed-css": result.css
+				}
+			}
+		});
 	}).catch(function(err) {
-		res.status(400).send('Error autoprefixing css');
+		res.status(400).send('Bad Request: Error autoprefixing css');
 	});
 });
 
 app.listen(3000, function() {
 	console.log('listening on port 3000');
 });
-
-
